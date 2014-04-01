@@ -1,7 +1,7 @@
 Javascript and AngularJS Exercises
 =========
 
-Exercises from Web Application Development using Javascript and AngularJS course given by [Rodrigo Branas](http://www.rodrigobranas.com.br) from [Agilecode](www.agilecode.com.br) and [VOffice](http://www.voffice.com.br).
+Exercises from Web Application Development using Javascript and AngularJS course given by [Rodrigo Branas](http://www.rodrigobranas.com.br) from [Agilecode](http://www.agilecode.com.br) and [VOffice](http://www.voffice.com.br).
 
 # Requirements
 * [node.js](http://nodejs.org)  
