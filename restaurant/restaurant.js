@@ -13,19 +13,26 @@
 
 var Restaurant = (function () {
     var menu = {};
-    var order = [];
+    var orders = {};
 
     return {
         menu: function () {
             return menu;
         },
-      
-        total: function () {
-            return false;
+        
+        total: function (table) {
+            var total = 0;
+            if (!orders[table]) { throw new Error("Table do not exists!"); }
+            for (var i = 0; i < orders[table].length; i += 1) {
+                total += orders[table][i].price * orders[table][i].quantity;
+            }
+            return total;
         },
       
-        close: function () {
-            return false;
+        close: function (table) {
+            closeTotal = total(table);
+            delete orders[table];
+            return closeTotal;
         }
     };
 }());
