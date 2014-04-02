@@ -13,14 +13,15 @@ var toString = function () {
 };
 
 var listKeywords = function () {
-    for (var i=0; i < this.keywords.length; i++) {
+    var i = 0;
+    for (i = 0; i < this.keywords.length; i += 1) {
         console.log(this.keywords[i]);
     }
 };
 
 //All keywords must start with '#'
 var includeKeyword = function (word) {
-    pattern = /#\w*\d*/;
+    var pattern = /#\w*\d*/;
     if (!pattern.test(word)) {
         console.log("Error: Wrong pattern!");
         return;

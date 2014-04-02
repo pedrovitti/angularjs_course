@@ -27,7 +27,7 @@ var product = {
     keyword : ['nice', 'beautiful', 'funny'],
     includeKeyword : includeKeyword,
     price : 120,
-    getPrice : function (a) { return this.price }
+    getPrice : function (a) { return this.price; }
 };
 
 console.log("Price without discount: ", product.getPrice());
@@ -35,7 +35,7 @@ console.log("Price without discount: ", product.getPrice());
 var productWithDiscount = Object.create(product);
 productWithDiscount.discount = 0.2;
 productWithDiscount.getPrice = function () {
-    return product.getPrice.call(this) * (1-productWithDiscount.discount);
+    return product.getPrice.call(this) * (1 - productWithDiscount.discount);
 };
 
 console.log("Price with discount: ", productWithDiscount.getPrice());

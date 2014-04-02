@@ -2,26 +2,27 @@
 /* https://github.com/pedrovitti/angularjs_course */
 /* Exercise 4 - Try Catch */
 /* Author: Pedro Vitti */
-var IllegalArgumentError = function() {
+var IllegalArgumentError = function () {
     return {
         name: "IllegalArgumentError",
         msg: "Illegal Argument!"
     };
-}
+};
 
-var WrongPatternError = function() {
+var WrongPatternError = function () {
     return {
         name: "IllegalArgumentError",
         msg: "Wrong pattern!"
     };
-}
+};
 
-var GenericError = function(mensagem) {
+var GenericError = function (mensagem) {
     return {
         name: "GenericError",
         msg: mensagem
     };
-}
+};
+
 var toString = function () {
     var propt;
     for (propt in this) {
@@ -41,12 +42,12 @@ var listKeywords = function () {
 //All keywords must start with '#'
 var includeKeyword = function (word) {
     if (word === "") {
-        throw IllegalArgumentError();
+        throw new IllegalArgumentError();
     }
     
     var pattern = /#\w*\d*/;
     if (!pattern.test(word)) {
-        throw WrongPatternError();
+        throw new WrongPatternError();
     }
 
     this.keywords.push(word);
@@ -65,14 +66,14 @@ var product = {
     listKeywords : listKeywords
 };
 
-try { 
+try {
     product.includeKeyword("wrongWord");
 } catch (err) {
-    console.log(err.name +": " + err.msg);
+    console.log(err.name + ": " + err.msg);
 }
 
-try { 
+try {
     product.includeKeyword("");
 } catch (err) {
-    console.log(err.name +": " + err.msg);
+    console.log(err.name + ": " + err.msg);
 }
