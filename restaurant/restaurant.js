@@ -10,29 +10,56 @@
 3- Deve consultar o total da conta informando a mesa, retornando o total da conta
 4- Deve fechar a conta informando a mesa, retornando o total da conta e apagando todos os pedidos feitos
 */
+var TableDoesntExistsError = function () {
+    return {
+        msg: "This table does not exists."
+    };
+};
 
 var Restaurant = (function () {
-    var menu = {};
-    var orders = {};
-
+    var menu = {},
+        orders = {};
+    
     return {
         menu: function () {
             return menu;
         },
-        
+
+        addMenu: function (menuparam) {
+            menu = menuparam;
+        },
+
+        order: function (mesa, pedido) {
+            if (!orders[mesa]) {
+                orders[mesa] = [];
+            }
+
+            orders[mesa].push(pedido);
+            return this;
+        },
+
         total: function (table) {
-            var total = 0;
-            if (!orders[table]) { throw new Error("Table do not exists!"); }
-            for (var i = 0; i < orders[table].length; i += 1) {
-                total += orders[table][i].price * orders[table][i].quantity;
+            var total = 0,
+                i = 0;
+
+            if (!orders[table]) { throw new TableDoesntExistsError(); }
+            for (i = 0; i < orders[table].length; i += 1) {
+                var item = menu[orders[table][i].item];
+                total += item.price * orders[table][i].quantity;
             }
             return total;
         },
-      
+
         close: function (table) {
-            closeTotal = total(table);
+            if (!orders[table]) { throw new TableDoesntExistsError(); }
+            var closeTotal = this.total(table);
             delete orders[table];
             return closeTotal;
+        },
+
+        find: function (item) {
+            item = menu[item] || {};
+            return item;
         }
     };
 }());
