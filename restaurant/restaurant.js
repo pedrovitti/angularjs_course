@@ -3,10 +3,13 @@
 /* Restaurant ordering system - Test Suite */
 /* Author: Pedro Vitti */
 
-/* Um restaurante solicitou o desenvolvimento de um sistema de pedidos. Nele, os clientes podem buscar itens no cardapio, fazer pedidos, consultar o total da sua conta. Cada item do cardapio é composto de descrição e preço. Cada pedido contém apenas um item do cardapio, juntamente com a mesa e quantidade.
+/* Um Restaurante solicitou o desenvolvimento de um sistema de pedidos. Nele, os clientes podem buscar itens 
+no cardapio, fazer pedidos, consultar o total da sua conta. Cada item do cardapio é composto de descrição e 
+preço. Cada pedido contém apenas um item do cardapio, juntamente com a mesa e quantidade.
 
 1- Deve listar os itens do cardapio, retornando os itens do cardapio;
-2- Deve fazer pedidos informando a mesa, a quantidade e o item. Um pedido deve ser adicionado contendo a mesa, quantidade e o item do cardapio.
+2- Deve fazer pedidos informando a mesa, a quantidade e o item. Um pedido deve ser adicionado contendo a mesa, 
+quantidade e o item do cardapio.
 3- Deve consultar o total da conta informando a mesa, retornando o total da conta
 4- Deve fechar a conta informando a mesa, retornando o total da conta e apagando todos os pedidos feitos
 */
@@ -19,7 +22,7 @@ var TableDoesntExistsError = function () {
 var Restaurant = (function () {
     var menu = {},
         orders = {};
-    
+
     return {
         menu: function () {
             return menu;
@@ -40,12 +43,12 @@ var Restaurant = (function () {
 
         total: function (table) {
             var total = 0,
-                i = 0;
+                itemNumber = 0;
 
             if (!orders[table]) { throw new TableDoesntExistsError(); }
-            for (i = 0; i < orders[table].length; i += 1) {
-                var item = menu[orders[table][i].item];
-                total += item.price * orders[table][i].quantity;
+            for (itemNumber = 0; itemNumber < orders[table].length; itemNumber += 1) {
+                var item = menu[orders[table][itemNumber].item];
+                total += item.price * orders[table][itemNumber].quantity;
             }
             return total;
         },
@@ -58,8 +61,7 @@ var Restaurant = (function () {
         },
 
         find: function (item) {
-            item = menu[item] || {};
-            return item;
+            return menu[item] || {};
         }
     };
 }());
