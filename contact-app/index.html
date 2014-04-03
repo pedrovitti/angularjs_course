@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script>
+        var app = angular.module("instantSearch", []);
+        app.filter('searchFor', function () {
+
+            return function (arr, searchString) {
+                if (!searchString) {
+                    return arr;
+                }
+
+                var result = [];
+
+                searchString = searchString.toLowerCase();
+
+            
+                angular.forEach(arr, function (item) {
+                    if (item.name.toLowerCase().indexOf(searchString) !== -1) {
+                        result.push(item);
+                    }
+                });
+                return result;
+            };
+        });
+
+        function OrderFormController($scope) {
+            $scope.searchString = "";
+            $scope.nome = "Lista Telef\u00f4nica";
+            $scope.contatos = [{
+                name: 'Pedro Artur',
+                telefone: "91247736",
+                active: false
+            }, {
+                name: 'Rafael Escrich',
+                telefone: "99766374",
+                active: false
+            }, {
+                name: 'Monique Vicente',
+                telefone: "933234",
+                active: false
+            }, {
+                name: 'João Cunha',
+                telefone: "99766374",
+                active: false
+            }];
+
+            $scope.toggleActive = function (s) {
+                s.active = !s.active;
+            };
+
+            $scope.adicionar = function (contato) {
+                $scope.contatos.push(angular.copy(contato));
+                $scope.contato = {};
+            };
+
+        }
+    </script>
+</head>
+<div ng-app="instantSearch" ng-controller="OrderFormController">
+
+    <body>
+
+        <div class="login">
+            <div><i style="float:left; margin-top:-10px; margin-left:20px" class="icon-book icon-3x"></i>
+                <h1 ng-bind="nome"></h1>
+            </div>
+            <div class="input">
+                <div class="blockinput">
+                    <i class="icon-search"></i>
+                    <input type="text" ng-model="searchString" placeholder="Procurar" />
+                </div>
+            </div>
+            <div class="container" ng-repeat="contato in contatos | searchFor:searchString" ng-click="toggleActive(contato)" ng-class="{active:contato.active}">
+                <br>
+                <div class="right"><i class="icon-remove">&nbsp;&nbsp;</i>
+                </div>
+                <div class="left"><i class="icon-phone">&nbsp;&nbsp;</i> {{contato.name}}</div>
+                <div class="middle">{{contato.telefone}}</div>
+
+            </div>
+            </br>
+            </br>
+
+            <div class="input">
+                <div class="blockinput">
+                    <i class="icon-user"></i>
+                    <input type="text" ng-model="contato.name" placeholder="Nome"></input>
+                </div>
+
+                <div class="blockinput">
+                    <i class="icon-phone"></i>
+                    <input type="text" ng-model="contato.telefone" placeholder="Telefone"></input>
+                </div>
+            </div>
+            <button ng-disabled="!(contato.name && contato.telefone)" ng-click="adicionar(contato)">Adicionar</button>
+    </body>
+    </div>
+
+</html>
