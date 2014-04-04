@@ -5,8 +5,9 @@
 <head>
     <title>Contact List</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="js/angular.js"></script>
+    <script src="js/contact.js"></script>
 </head>
 
 <div ng-app="instantSearch" ng-controller="ContactListController">
@@ -23,9 +24,9 @@
             </div>
             <div class="container" ng-repeat="contato in contatos | searchFor:searchString" ng-click="toggleActive(contato)" ng-class="{active:contato.active}">
                 <br>
-                <div class="right"><i class="icon-remove">&nbsp;&nbsp;</i>
+                <div class="right"><a href="test.html"><i class="close icon-remove"></i></a>
                 </div>
-                <div class="left"><i class="icon-phone">&nbsp;&nbsp;</i> {{contato.name}}</div>
+                <div class="left"><i class="icon-phone"> </i> {{contato.name}}</div>
                 <div class="middle">{{contato.telefone}}</div>
 
             </div>
@@ -44,8 +45,7 @@
                 </div>
             </div>
             <button ng-disabled="!(contato.name && contato.telefone)" ng-click="adicionar(contato)">Adicionar</button>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
-    <script src="js/contact.js"></script>
+        
     </body>
     </div>
 </html>

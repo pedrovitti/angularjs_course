@@ -140,4 +140,6 @@ button:active{
     margin: 0 20px;
 }
 
-
+.close:hover {
+color: red;
+}
