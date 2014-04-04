@@ -20,22 +20,22 @@ app.filter('searchFor', function () {
 
 function ContactListController($scope) {
     $scope.searchString = "";
-    $scope.nome = "Contact List";
-    $scope.contatos = [{
+    $scope.name = "Contact List";
+    $scope.contacts = [{
         name: 'Pedro Artur',
-        telefone: "91247736",
+        phone: "91247736",
         active: false
     }, {
         name: 'Rafael Escrich',
-        telefone: "99766374",
+        phone: "99766374",
         active: false
     }, {
         name: 'Monique Vicente',
-        telefone: "933234",
+        phone: "933234",
         active: false
     }, {
         name: 'João Cunha',
-        telefone: "99766374",
+        phone: "99766374",
         active: false
     }];
 
@@ -43,9 +43,9 @@ function ContactListController($scope) {
         s.active = !s.active;
     };
 
-    $scope.adicionar = function (contato) {
-        $scope.contatos.push(angular.copy(contato));
-        $scope.contato = {};
+    $scope.add = function (contact) {
+        $scope.contactss.push(angular.copy(contact));
+        $scope.contact = {};
     };
 
 }
