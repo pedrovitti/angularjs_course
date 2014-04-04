@@ -24,7 +24,7 @@
             </div>
             <div class="container" ng-repeat="contact in contacts | searchFor:searchString" ng-click="toggleActive(contact)" ng-class="{active:contact.active}">
                 <br>
-                <div class="right"><i class="close icon-remove"></i>
+                <div class="right" ng-click="remove($index)"><i class="close icon-remove"></i>
                 </div>
                 <div class="left"><i class="icon-phone"/> </i> 
                     {{contact.name}}

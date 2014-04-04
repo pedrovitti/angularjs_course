@@ -31,7 +31,7 @@ function ContactListController($scope) {
         active: false
     }, {
         name: 'Monique Vicente',
-        phone: "933234",
+        phone: "99581807",
         active: false
     }, {
         name: 'João Cunha',
@@ -47,5 +47,9 @@ function ContactListController($scope) {
         $scope.contacts.push(angular.copy(contact));
         $scope.contact = {};
     };
-
+    
+    $scope.remove = function (contactIndex) {
+        $scope.contacts.splice(contactIndex, 1);
+        $scope.contact = {};
+    };
 }
