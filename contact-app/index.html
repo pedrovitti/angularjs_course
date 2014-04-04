@@ -5,30 +5,33 @@
 <head>
     <title>Contact List</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="js/font-awesome/css/font-awesome.css" rel="stylesheet">
     <script src="js/angular.js"></script>
     <script src="js/contact.js"></script>
 </head>
 
 <div ng-app="instantSearch" ng-controller="ContactListController">
     <body>
-        <div class="login">
+        <div class="contact">
             <div><i style="float:left; margin-top:-10px; margin-left:20px" class="icon-book icon-3x"></i>
-                <h1 ng-bind="nome"></h1>
+                <h1 ng-bind="name"></h1>
             </div>
             <div class="input">
                 <div class="blockinput">
                     <i class="icon-search"></i>
-                    <input type="text" ng-model="searchString" placeholder="Procurar" />
+                    <input type="text" ng-model="searchString" placeholder="Search" />
                 </div>
             </div>
-            <div class="container" ng-repeat="contato in contatos | searchFor:searchString" ng-click="toggleActive(contato)" ng-class="{active:contato.active}">
+            <div class="container" ng-repeat="contact in contacts | searchFor:searchString" ng-click="toggleActive(contact)" ng-class="{active:contact.active}">
                 <br>
-                <div class="right"><a href="test.html"><i class="close icon-remove"></i></a>
+                <div class="right"><i class="close icon-remove"></i>
                 </div>
-                <div class="left"><i class="icon-phone"> </i> {{contato.name}}</div>
-                <div class="middle">{{contato.telefone}}</div>
-
+                <div class="left"><i class="icon-phone"/> </i> 
+                    {{contact.name}}
+                </div>
+                <div class="middle">
+                    {{contact.phone}}
+                </div>
             </div>
             </br>
             </br>
@@ -36,15 +39,15 @@
             <div class="input">
                 <div class="blockinput">
                     <i class="icon-user"></i>
-                    <input type="text" ng-model="contato.name" placeholder="Nome"></input>
+                    <input type="text" ng-model="contact.name" placeholder="Name"></input>
                 </div>
 
                 <div class="blockinput">
                     <i class="icon-phone"></i>
-                    <input type="text" ng-model="contato.telefone" placeholder="Telefone"></input>
+                    <input type="text" ng-model="contact.phone" placeholder="Phone"></input>
                 </div>
             </div>
-            <button ng-disabled="!(contato.name && contato.telefone)" ng-click="adicionar(contato)">Adicionar</button>
+            <button ng-disabled="!(contact.name && contact.phone)" ng-click="add(contact)">Add</button>
         
     </body>
     </div>
