@@ -44,7 +44,7 @@ function ContactListController($scope) {
     };
 
     $scope.add = function (contact) {
-        $scope.contactss.push(angular.copy(contact));
+        $scope.contacts.push(angular.copy(contact));
         $scope.contact = {};
     };
 
