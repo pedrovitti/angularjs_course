@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>Restaurant List</title>
+    <link href="js/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/angular.js"></script>
+    <script src="js/restaurant.js"></script>
+</head>
+
+<div ng-app="" ng-controller="RestaurantController">
+    <body>
+       <div> {{ name }}<div>
+       
+       <div>Cardápio</div>
+       <div ng-repeat="(id, item) in menu">
+            <div ng-click="show(item)">
+                <div>{{ item.name }}</div> 
+                <div ng-show="item.show">{{ item.description }}</div>
+                <div>{{ item.price }}</div><br>
+           </div>
+        </div>
+        -----------------
+        <div>Mesas</div>
+        <div ng-repeat="(mesa, pedidos) in orders">
+            Mesa: {{ mesa }}
+            <div ng-repeat="item in pedidos">
+                    <div>{{ menu[item.id].description }}</div>
+                    <div> {{ item.quantity }} </div>
+            </div>
+            <br>
+        -------------------
+        </div>
+        <div class="input">
+            
+            <select style="margin-right:30%;" ng-model="mesa" ng-options="mesa for (mesa, pedidos) in orders">
+                    <option value="">Selecione o item</option>
+            </select>
+        </div>
+            
+        <div class="input">
+            <select style="margin-right:30%;" ng-model="item.description" ng-options="item.name for (id, item) in menu"> 
+                    <option value="">Selecione o item</option>
+                    <option value="">{{x}}</option>
+            </select>
+        </div>
+        <button>Add</button>
+    
+    </body>
+
+</html>
