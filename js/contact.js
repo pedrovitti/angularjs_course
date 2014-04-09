@@ -21,7 +21,7 @@ app.filter('searchFor', function () {
 function ContactListController($scope) {
     $scope.searchString = "";
     $scope.name = "Contact List";
-    $scope.operadoras = [{name: "TIM"}, {name: "Oi"}, {name: "Vivo"}];
+    $scope.operadoras = [{name: "TIM"}, {name: "Oi"}, {name: "Vivo"}, {name: "Claro"}];
     $scope.contacts = [{
         name: 'Pedro Artur',
         phone: "91247736",
