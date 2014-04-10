@@ -81,6 +81,8 @@ function RestaurantController($scope) {
     };
 
     $scope.order = function (mesa, pedido) {
+        console.log("Mesa:", mesa);
+        console.log("pedido", pedido);
         if (!$scope.orders[mesa]) {
             $scope.orders[mesa] = [];
         }
