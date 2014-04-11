@@ -30,15 +30,20 @@ function ContactListController($scope) {
     }, {
         name: 'Rafael Escrich',
         phone: "99766374",
-        active: false
+        active: false,
+        carrierShow: false,
+        operadora: { name: "TIM" }
     }, {
         name: 'Monique Vicente',
         phone: "99581807",
-        active: false
+        active: false,
+        carrierShow: false,
     }, {
         name: 'João Cunha',
         phone: "99766374",
-        active: false
+        active: false,
+        carrierShow: false,
+        operadora: { name: "TIM" }
     }];
 
     $scope.toggleActive = function (s) {
@@ -54,4 +59,9 @@ function ContactListController($scope) {
         $scope.contacts.splice(contactIndex, 1);
         $scope.contact = {};
     };
+    
+    $scope.carrierShow = function (c) {
+        c.carrierShow = !c.carrierShow;
+    };
+    
 }

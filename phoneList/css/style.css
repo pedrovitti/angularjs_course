@@ -34,12 +34,6 @@ a{
   margin: 0 auto;
 }
 
-h1{
-  font-size: 1.6em;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  margin-left: 30px;
-}
 p{
   font-family:'Helvetica';
   font-weight: 300;
@@ -84,6 +78,26 @@ input:focus{
   color: #B1B3B7;
   text-shadow: 0 1px 0 #FFF;
 }
+.blockinput select {
+  padding-right: 10px;
+  color: #B1B3B7;
+  text-shadow: 0 1px 0 #FFF;
+
+  width: 260px;
+  background: transparent;
+  border: 0;
+  line-height: 2.5em;
+  font-size: 1.0em;
+  box-sizing: border-box;
+  color: #71747A;
+  font-family:'Helvetica';
+  text-shadow: 0 1px 0 #FFF;
+  height: 50px;
+}
+.blockinput select:focus {
+    outline: none;
+}
+
 ::-webkit-input-placeholder {
   color: #71747A;
   font-family:'';
@@ -152,6 +166,25 @@ button:active{
 }
 .book {
     float:left;
-    margin-top:-10px;
-    margin-left:20px;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #E5E7E9 no-repeat 90% 50%;
+    line-height: 2.5em;
+    font-size: 1.0em;
+    box-sizing: border-box;
+    color: #71747A;
+    font-family:'Helvetica';
+    text-shadow: 0 1px 0 #FFF;
+}
+
+.titulo {
+  font-size: 1.6em;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  margin-left: 30px;
 }
