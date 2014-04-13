@@ -10,19 +10,12 @@
         <script src="js/restaurant.js"></script>
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     </head>
-    <body>
-        <div>
-            <div ng-app ng-controller="RestaurantController">
-                
-                <!-- MENU -->
-                    <h3></h3> <br>
-                    
-                    <div class="panel panel-default">
-                          <div class="panel-heading">Menu</div>
-                          <div class="panel-body">
-    
-                        <input type="text" placeholder="Search Menu:" ng-model="searchString"/>
-                       
+    <body ng-app ng-controller="RestaurantController">
+        <div class="panel panel-default" >
+            <div class="panel-heading">Menu</div>
+            <div class="panel-body">
+                <input type="text" placeholder="Search Menu:" ng-model="searchString"/>
+                <br></br>
                  <table class="table-bordered table-striped table-condensed">
                       <thead>
                           <tr>
@@ -34,25 +27,62 @@
                       </thead>
                         <tbody>
                             <tr ng-repeat="(id, item) in menu | filter:searchString">
-                               
                                 <td> {{ item.name }} </td>
-                                <td class="glyphicon glyphicon-plus" ng-click="show(item)"></td>
-                                <td ng-show="item.show">
-                                  {{ item.price | currency }}
-                                </td>
+                                <td ng-show="!item.show" class="glyphicon glyphicon-plus" ng-click="show(item)"></td>
+                                <td ng-show="item.show" class="glyphicon glyphicon-minus" ng-click="show(item)"></td>
                                 <td ng-show="item.show">
                                     {{ item.description }}
+                                </td>
+                                <td ng-show="item.show">
+                                  {{ item.price | currency }}
                                 </td>
                             </tr>
                         </tbody>
                   </table>
+              </div>
+        </div>
+                  
+        <div class="panel panel-default" >
+            <div class="panel-heading">Tables</div>
+            <div class="mesa">
+                <ul class="nav nav-pills">
+                    <li class="active" ng-repeat="(mesa, pedidos) in orders"  ng-click=><a href="#mesa{{ mesa }}">Mesa {{ mesa }}</a></li>
+                </ul>
+            </div>
+            <div class="panel-body" ng-repeat="(mesa, pedidos) in orders"  class="mesa">
+                <ul class="nav nav-pills">
+                    <li class="active"><a name="mesa{{ mesa }}">Mesa {{ mesa }}</a></li>
+                </ul>
+                <br>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-click="total(mesa)">Ver Total</button>
+                    <button type="button" class="btn btn-default" ng-click="close(mesa)">Fechar Mesa</button>
+                </div>
+                </br>
+                <table style="text-align: right;" class="table-bordered table-striped table-condensed">
+                  <br>
+                  <thead>
+                       <tr>
+                          <th colspan="2">Item</th>
+                          <th>Quantidade</th>
+                          <th>Preço</th>
+                          <th>Total</th>
+                      </tr>
+                  </thead>
+                    <tbody>
+                        <tr ng-repeat="item in pedidos.items">
+                            <td> {{ $index +1 }} </td>
+                            <td> {{ menu[item.id].name }} </td>
+                            <td> {{ item.quantity }} </td>
+                            <td> {{ menu[item.id].price | currency}} </td>
+                            <td> {{ menu[item.id].price * item.quantity | currency}} </td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
                         
-                <!-- TABLES -->
-                <div id="table-set">
-                    <div>
-                        <h3>Tables</h3>
-                        <p></p>
-                        <div ng-repeat="(mesa, pedidos) in orders" data-role="collapsible" data-collapsed-icon="flat-eye" data-expanded-icon="flat-cross" data-collapsed="true">
+            <div ng-repeat="(mesa, pedidos) in orders" data-role="collapsible" data-collapsed-icon="flat-eye" data-expanded-icon="flat-cross" data-collapsed="true">
                             <h3>
                                 <fieldset class="ui-block-a" style="width:30%;">
                                     <div class="ui-block-a extra-block-a">
@@ -66,16 +96,12 @@
                                         <button data-theme="d" ng-click="total(mesa)">Ver Total</button>
                                     </div>
                                     <div class="ui-block-b"> 
-                                        <button style="background: #2c3e50" ng-click="close(mesa)">Fechar Mesa</button>
+                                      
                                     </div>
                                 </fieldset>
                             </h3>
                             <ul data-role="listview" data-inset="true">
-                                <li data-role="list-divider"  data-theme="a" ng-repeat="item in pedidos">
-                                    <div style="text-align:left; float:left; width:20%">{{ $index + 1 }} - {{ menu[item.id].name }}</div>
-                                    <div style="text-align:right; float:left; margin-left:20%; max-width:10%"> {{ item.quantity }} x {{ menu[item.id].price | currency }}</div>
-                                    <div style="text-align: left;float:right">{{ menu[item.id].price * item.quantity | currency}}</div>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>

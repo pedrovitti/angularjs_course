@@ -28,36 +28,40 @@ function RestaurantController($scope) {
     };
     
     $scope.orders = {
-        "1": [
-            {
-                "id": "mussarela",
-                "quantity": 2
+        "1": { "show" : true,
+               "items" : [
+                {
+                    "id": "mussarela",
+                    "quantity": 2
+                },
+                {
+                    "id": "mussarela",
+                    "quantity": 2
+                },
+                {
+                    "id": "mussarela",
+                    "quantity": 2
+                }
+            ]
             },
-            {
-                "id": "mussarela",
-                "quantity": 2
-            },
-            {
-                "id": "mussarela",
-                "quantity": 2
+        "2": { "show" : true,
+               "items" : [
+                {
+                    "id": "camarao",
+                    "quantity": 1
+                },
+                {
+                    "id": "marguerita",
+                    "quantity": 1
+                },
+                {
+                    "id": "camarao",
+                    "quantity": 1
+                }
+            ]
             }
-        ],
-        "2": [
-            {
-                "id": "camarao",
-                "quantity": 1
-            },
-            {
-                "id": "marguerita",
-                "quantity": 1
-            },
-            {
-                "id": "camarao",
-                "quantity": 1
-            }
-        ]
     };
-
+    
     $scope.toggleActive = function (s) {
         s.active = !s.active;
     };
@@ -81,8 +85,6 @@ function RestaurantController($scope) {
     };
 
     $scope.order = function (mesa, pedido) {
-        console.log("Mesa:", mesa);
-        console.log("pedido", pedido);
         if (!$scope.orders[mesa]) {
             $scope.orders[mesa] = [];
         }
@@ -93,18 +95,17 @@ function RestaurantController($scope) {
         var total = 0,
             itemNumber = 0;
 
-        if (!$scope.orders[table]) { throw new $scope.TableDoesntExistsError(); }
-        for (itemNumber = 0; itemNumber < $scope.orders[table].length; itemNumber += 1) {
-            var orderItem = $scope.orders[table][itemNumber];
+        if (!$scope.orders[table].items) { throw new $scope.TableDoesntExistsError(); }
+        for (itemNumber = 0; itemNumber < $scope.orders[table].items.length; itemNumber += 1) {
+            var orderItem = $scope.orders[table].items[itemNumber];
             var menuItem = $scope.menu[orderItem.id];
-            total += menuItem.price * orderItem.quantity;       
+            total += menuItem.price * orderItem.quantity;
         }
-        console.log(total);
         return total;
     };
 
     $scope.close = function (table) {
-        if (!$scope.orders[table]) { throw new $scope.TableDoesntExistsError(); }
+        if (!$scope.orders[table].items) { throw new $scope.TableDoesntExistsError(); }
         var closeTotal = $scope.total(table);
         delete $scope.orders[table];
         return closeTotal;
