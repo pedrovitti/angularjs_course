@@ -111,7 +111,7 @@ function RestaurantController($scope) {
     };
 
     $scope.close = function (table) {
-        if (!$scope.orders[table].items) { throw new $scope.TableDoesntExistsError(); }
+        if (!$scope.orders[table]) { throw new $scope.TableDoesntExistsError(); }
         var closeTotal = $scope.total(table);
         delete $scope.orders[table];
         return closeTotal;
@@ -122,7 +122,6 @@ function RestaurantController($scope) {
     };
     
     $scope.newTable = function (id) {
-        debugger;
         if (!$scope.orders[id]) {
             $scope.orders[id] = [];
             return;
