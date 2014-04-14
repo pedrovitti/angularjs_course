@@ -11,55 +11,54 @@ function RestaurantController($scope) {
         "marguerita": { "name": "Marguerita Pizza",
                         "description": "Cheese, tomatoes and basil pizza.",
                         "price": 40,
-                        "show": false
+                        "show": false,
+                        "id": "marguerita",
                       },
         
         "mussarela": { "name" : "Mozzarela",
                        "description" : "Mozzarela pizza",
                        "price": 38,
-                       "show": false
+                       "show": false,
+                       "id": "mussarela",
                      },
         
         "camarao": { "name" : "Camarao",
                      "description" : "Camarao ao molho",
                      "price": 60,
-                     "show": false
+                     "show": false,
+                     "id": "camarao",
                    }
     };
     
     $scope.orders = {
-        "1": { "show" : true,
-               "items" : [
-                {
-                    "id": "mussarela",
-                    "quantity": 2
-                },
-                {
-                    "id": "mussarela",
-                    "quantity": 2
-                },
-                {
-                    "id": "mussarela",
-                    "quantity": 2
-                }
-            ]
+        "1": [
+            {
+                "id": "mussarela",
+                "quantity": 2
             },
-        "2": { "show" : true,
-               "items" : [
-                {
-                    "id": "camarao",
-                    "quantity": 1
-                },
-                {
-                    "id": "marguerita",
-                    "quantity": 1
-                },
-                {
-                    "id": "camarao",
-                    "quantity": 1
-                }
-            ]
+            {
+                "id": "mussarela",
+                "quantity": 2
+            },
+            {
+                "id": "mussarela",
+                "quantity": 2
             }
+        ],
+        "2": [
+            {
+                "id": "camarao",
+                "quantity": 1
+            },
+            {
+                "id": "marguerita",
+                "quantity": 1
+            },
+            {
+                "id": "camarao",
+                "quantity": 1
+            }
+        ]
     };
     
     $scope.toggleActive = function (s) {
@@ -84,20 +83,24 @@ function RestaurantController($scope) {
         $scope.menu = menuparam;
     };
 
-    $scope.order = function (mesa, pedido) {
-        if (!$scope.orders[mesa]) {
-            $scope.orders[mesa] = [];
-        }
-        $scope.orders[mesa].push(pedido);
+    $scope.order = function (mesa, pedido, quantity) {
+        qtd = quantity || 1;
+        ped = {
+                "id": pedido,
+                "quantity": qtd 
+        };
+        mesa.push(ped);
+        console.log($scope.orders);
+    
     };
 
     $scope.total = function (table) {
         var total = 0,
             itemNumber = 0;
 
-        if (!$scope.orders[table].items) { throw new $scope.TableDoesntExistsError(); }
-        for (itemNumber = 0; itemNumber < $scope.orders[table].items.length; itemNumber += 1) {
-            var orderItem = $scope.orders[table].items[itemNumber];
+        if (!$scope.orders[table]) { throw new $scope.TableDoesntExistsError(); }
+        for (itemNumber = 0; itemNumber < $scope.orders[table].length; itemNumber += 1) {
+            var orderItem = $scope.orders[table][itemNumber];
             var menuItem = $scope.menu[orderItem.id];
             total += menuItem.price * orderItem.quantity;
         }

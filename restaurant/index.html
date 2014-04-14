@@ -8,17 +8,23 @@
         <script src="js/angular.js"></script>
         <script src="js/angular-locale_pt-br.js"></script>
         <script src="js/restaurant.js"></script>
+        <script src="js/jquery-1.11.0.min.js"></script>
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+     
+    
     </head>
-    <body ng-app ng-controller="RestaurantController">
-        <div class="panel panel-default" >
+    <body style="margin:1%;" ng-app ng-controller="RestaurantController">
+        <div  class="panel panel-success" >
             <div class="panel-heading">Menu</div>
             <div class="panel-body">
                 <input type="text" placeholder="Search Menu:" ng-model="searchString"/>
                 <br></br>
-                 <table class="table-bordered table-striped table-condensed">
+                 <div class="panel panel-success" style="padding:1%">
+                 <table class="table-striped table-bordered table-condensed">
                       <thead>
                           <tr>
+                              <th>#</th>
                               <th>Nome</th>
                               <th></th>
                               <th>Descrição</th>
@@ -27,7 +33,8 @@
                       </thead>
                         <tbody>
                             <tr ng-repeat="(id, item) in menu | filter:searchString">
-                                <td> {{ item.name }} </td>
+                                <td>{{ $index +1 }}</td>
+                                <td><div class="nav nav-pills"> {{ item.name }}</div> </td>
                                 <td ng-show="!item.show" class="glyphicon glyphicon-plus" ng-click="show(item)"></td>
                                 <td ng-show="item.show" class="glyphicon glyphicon-minus" ng-click="show(item)"></td>
                                 <td ng-show="item.show">
@@ -39,25 +46,18 @@
                             </tr>
                         </tbody>
                   </table>
+                  </div>
               </div>
         </div>
-                  
-        <div class="panel panel-default" >
+        
+        <div  class="panel panel-success">
             <div class="panel-heading">Tables</div>
-            <div class="mesa">
-                <ul class="nav nav-pills">
-                    <li class="active" ng-repeat="(mesa, pedidos) in orders"  ng-click=><a href="#mesa{{ mesa }}">Mesa {{ mesa }}</a></li>
-                </ul>
-            </div>
             <div class="panel-body" ng-repeat="(mesa, pedidos) in orders"  class="mesa">
-                <ul class="nav nav-pills">
-                    <li class="active"><a name="mesa{{ mesa }}">Mesa {{ mesa }}</a></li>
-                </ul>
+               
+                <div class="panel panel-success" style="padding:1%">
+                 <button class="btn btn-lg btn-success form-control"> <span class="glyphicon glyphicon-shopping-cart">&nbsp</span>Mesa {{ mesa }}</button>
                 <br>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-click="total(mesa)">Ver Total</button>
-                    <button type="button" class="btn btn-default" ng-click="close(mesa)">Fechar Mesa</button>
-                </div>
+               
                 </br>
                 <table style="text-align: right;" class="table-bordered table-striped table-condensed">
                   <br>
@@ -70,7 +70,7 @@
                       </tr>
                   </thead>
                     <tbody>
-                        <tr ng-repeat="item in pedidos.items">
+                        <tr ng-repeat="item in pedidos">
                             <td> {{ $index +1 }} </td>
                             <td> {{ menu[item.id].name }} </td>
                             <td> {{ item.quantity }} </td>
@@ -79,56 +79,35 @@
                         </tr>
                     </tbody>
                   </table>
+                    <br>
+                  <button type="button" class="btn btn-default form-control" ng-click="total(mesa)">
+                      <span class="glyphicon glyphicon-usd">&nbsp</span>Total
+                  </button>
+                  <button type="button" class="btn btn-danger form-control" ng-click="close(mesa)">
+                      <span class="glyphicon glyphicon-ok-sign">&nbsp</span>Close
+                  </button>
+
+                </div>  
             </div>
         </div>
-                        
-            <div ng-repeat="(mesa, pedidos) in orders" data-role="collapsible" data-collapsed-icon="flat-eye" data-expanded-icon="flat-cross" data-collapsed="true">
-                            <h3>
-                                <fieldset class="ui-block-a" style="width:30%;">
-                                    <div class="ui-block-a extra-block-a">
-                                        Mesa: {{ mesa }}
-                                    </div>
-                                    <div class="ui-block-b extra-block-a"> 
-                                    </div>
-                                </fieldset>
-                                <fieldset class="ui-block-b">
-                                    <div class="ui-block-b">
-                                        <button data-theme="d" ng-click="total(mesa)">Ver Total</button>
-                                    </div>
-                                    <div class="ui-block-b"> 
-                                      
-                                    </div>
-                                </fieldset>
-                            </h3>
-                            <ul data-role="listview" data-inset="true">
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <!-- ORDERS -->
-                <div data-role="collapsible-set" data-theme="b" data-content-theme="b">
-                    <div data-role="collapsible" data-collapsed-icon="flat-settings" data-expanded-icon="flat-cross" data-collapsed="false">
-                        <h3>Orders</h3>
-                        <p></p>
-                        <div data-role="fieldcontain">
-                            <select name="select-choice" id="select-choice-a" data-native-menu="true" data-theme="d" ng-model="mesa" ng-options="mesa for (mesa, pedidos) in orders">
-                                <option value="">Selecione o mesa</option>
-                            </select>
-                            <select name="select-choice" id="select-choice-b" data-native-menu="true" data-theme="d" ng-model="item" ng-options="item.name for (id, item) in menu">
-                                <option value="">Selecione o item do cardápio</option>
-                            </select>
-                            Estou aqui:
-                            {{ mesa }}
-                            {{ item }}
-                            <button data-icon="flat-new" data-theme="a" style="color:2c3e50;background:#2c3e50" 
-                                    ng-click="order(mesa, item)">Fazer pedido!</button>
-                        </div>
-                    </div>
-                </div>
-     
+
+            
+        <div  class="panel panel-success" >
+            <div class="panel-heading">Orders</div>
+
+            <div class="panel-body">
+        
+                <select class="form-control" ng-model="mesa" ng-options="mesa for (mesa, pedidos) in orders">
+                    <option value="">Select table</option>
+                </select>
+                 {{ mesa.$index }}
+                <select class="form-control" ng-model="item" ng-options="item.name for (id, item) in menu">
+                    <option value="">Select menu item</option>
+                </select>
+         
+            <br>
+            <button class="btn btn-lg btn-success form-control" ng-click="order(mesa, item.id)">Fazer pedido!</button>
+            
             </div>
         </div>
     </body>
