@@ -55,7 +55,7 @@
             <div class="panel-body" ng-repeat="(mesa, pedidos) in orders"  class="mesa">
                
                 <div class="panel panel-success" style="padding:1%">
-                 <button class="btn btn-lg btn-success form-control"> <span class="glyphicon glyphicon-shopping-cart">&nbsp</span>Mesa {{ mesa }}</button>
+                 <button class="btn btn-lg btn-success form-control" style="height:10%"> <span class="glyphicon glyphicon-shopping-cart">&nbsp</span>Mesa {{ mesa }}</button>
                 <br>
                
                 </br>
@@ -63,7 +63,8 @@
                   <br>
                   <thead>
                        <tr>
-                          <th colspan="2">Item</th>
+                          <th>#</th>
+                          <th style="text-align: left;">Item</th>
                           <th>Quantidade</th>
                           <th>Preço</th>
                           <th>Total</th>
@@ -80,34 +81,42 @@
                     </tbody>
                   </table>
                     <br>
-                  <button type="button" class="btn btn-default form-control" ng-click="total(mesa)">
+                  <button type="button" class="btn btn-default form-control btn-lg" style="height:10%" ng-click="total(mesa)">
                       <span class="glyphicon glyphicon-usd">&nbsp</span>Total
                   </button>
-                  <button type="button" class="btn btn-danger form-control" ng-click="close(mesa)">
+                  <button type="button" class="btn btn-danger form-control btn-lg" style="height:10%" ng-click="newTable">
                       <span class="glyphicon glyphicon-ok-sign">&nbsp</span>Close
                   </button>
 
                 </div>  
             </div>
         </div>
-
             
         <div  class="panel panel-success" >
             <div class="panel-heading">Orders</div>
 
             <div class="panel-body">
-        
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="input-group">
+                      <input id="newTable" placeholder="#" type="text" class="form-control" ng-model="new">
+                      <span class="input-group-btn">
+                        <button class="btn btn-success btn" id="newTableBtn" type="button" ng-click="newTable(new)">Nova Mesa</button>
+                      </span>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                </br>
                 <select class="form-control" ng-model="mesa" ng-options="mesa for (mesa, pedidos) in orders">
                     <option value="">Select table</option>
                 </select>
-                 {{ mesa.$index }}
                 <select class="form-control" ng-model="item" ng-options="item.name for (id, item) in menu">
                     <option value="">Select menu item</option>
                 </select>
          
             <br>
-            <button class="btn btn-lg btn-success form-control" ng-click="order(mesa, item.id)">Fazer pedido!</button>
-            
+            <button class="btn btn-lg btn-success form-control" style="height:10%" ng-click="order(mesa, item.id)">Fazer pedido!</button>
+      
             </div>
         </div>
     </body>

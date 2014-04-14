@@ -84,6 +84,9 @@ function RestaurantController($scope) {
     };
 
     $scope.order = function (mesa, pedido, quantity) {
+        if (!mesa) { 
+            
+        }
         qtd = quantity || 1;
         ped = {
                 "id": pedido,
@@ -116,5 +119,13 @@ function RestaurantController($scope) {
 
     $scope.find = function (item) {
         return $scope.menu[item] || {};
+    };
+    
+    $scope.newTable = function (id) {
+        debugger;
+        if (!$scope.orders[id]) {
+            $scope.orders[id] = [];
+            return;
+        }
     };
 }
