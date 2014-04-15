@@ -1,35 +1,43 @@
-function RestaurantController($scope) {
+var app = angular.module("restaurant", ['ngRoute']);
+
+app.config(function($routeProvider) {
+    $routeProvider.when('/restaurant', {templateUrl:'restaurant.html', controller:'RestaurantController'});
+    $routeProvider.when('/menu', {templateUrl:'pedidos.html', controller:'RestaurantController'});
+    $routeProvider.when('/mesas', {templateUrl:'mesas.html', controller:'RestaurantController'});
+    $routeProvider.otherwise({ redirectTo:'/restaurant'} );
+});
+    
+app.controller("RestaurantController", function ($scope, $http) {
+   
     $scope.TableDoesntExistsError = function () {
         return {
             msg: "This table does not exists."
         };
     };
     
-    $scope.searchString = "";
-    $scope.name = "Restaurante";
     $scope.menu = {
         "marguerita": { "name": "Marguerita Pizza",
                         "description": "Cheese, tomatoes and basil pizza.",
                         "price": 40,
                         "show": false,
-                        "id": "marguerita",
+                        "id": "marguerita"
                       },
-        
+
         "mussarela": { "name" : "Mozzarela",
                        "description" : "Mozzarela pizza",
                        "price": 38,
                        "show": false,
-                       "id": "mussarela",
+                       "id": "mussarela"
                      },
-        
+
         "camarao": { "name" : "Camarao",
                      "description" : "Camarao ao molho",
                      "price": 60,
                      "show": false,
-                     "id": "camarao",
+                     "id": "camarao"
                    }
     };
-    
+
     $scope.orders = {
         "1": [
             {
@@ -60,7 +68,10 @@ function RestaurantController($scope) {
             }
         ]
     };
-    
+
+    $scope.searchString = "";
+    $scope.name = "Restaurante";
+
     $scope.toggleActive = function (s) {
         s.active = !s.active;
     };
@@ -82,19 +93,15 @@ function RestaurantController($scope) {
     $scope.addMenu = function (menuparam) {
         $scope.menu = menuparam;
     };
-
-    $scope.order = function (mesa, pedido, quantity) {
-        if (!mesa) { 
             
-        }
-        qtd = quantity || 1;
-        ped = {
+                    
+    $scope.order = function (mesa, pedido, quantity) {
+        var qtd = quantity || 1;
+        var ped = {
                 "id": pedido,
-                "quantity": qtd 
-        };
+                "quantity": qtd
+            };
         mesa.push(ped);
-        console.log($scope.orders);
-    
     };
 
     $scope.total = function (table) {
@@ -127,4 +134,4 @@ function RestaurantController($scope) {
             return;
         }
     };
-}
+});

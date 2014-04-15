@@ -1,123 +1,20 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<html>
+<html ng-app="restaurant">
     <head>
         <title>
             Restaurant List 
         </title>
         <script src="js/angular.js"></script>
+        <script src="js/angular-route.js"></script>
         <script src="js/angular-locale_pt-br.js"></script>
         <script src="js/restaurant.js"></script>
         <script src="js/jquery-1.11.0.min.js"></script>
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
      
-    
-    </head>
-    <body style="margin:1%;" ng-app ng-controller="RestaurantController">
-        <div  class="panel panel-success" >
-            <div class="panel-heading">Menu</div>
-            <div class="panel-body">
-                <input type="text" placeholder="Search Menu:" ng-model="searchString"/>
-                <br></br>
-                 <div class="panel panel-success" style="padding:1%">
-                 <table class="table-striped table-bordered table-condensed">
-                      <thead>
-                          <tr>
-                              <th>#</th>
-                              <th>Nome</th>
-                              <th></th>
-                              <th>Descrição</th>
-                              <th class="numeric">Preço</th>
-                          </tr>
-                      </thead>
-                        <tbody>
-                            <tr ng-repeat="(id, item) in menu | filter:searchString">
-                                <td>{{ $index +1 }}</td>
-                                <td><div class="nav nav-pills"> {{ item.name }}</div> </td>
-                                <td ng-show="!item.show" class="glyphicon glyphicon-plus" ng-click="show(item)"></td>
-                                <td ng-show="item.show" class="glyphicon glyphicon-minus" ng-click="show(item)"></td>
-                                <td ng-show="item.show">
-                                    {{ item.description }}
-                                </td>
-                                <td ng-show="item.show">
-                                  {{ item.price | currency }}
-                                </td>
-                            </tr>
-                        </tbody>
-                  </table>
-                  </div>
-              </div>
-        </div>
-        
-        <div  class="panel panel-success">
-            <div class="panel-heading">Tables</div>
-            <div class="panel-body" ng-repeat="(mesa, pedidos) in orders"  class="mesa">
-               
-                <div class="panel panel-success" style="padding:1%">
-                 <button class="btn btn-lg btn-success form-control" style="height:10%"> <span class="glyphicon glyphicon-shopping-cart">&nbsp</span>Mesa {{ mesa }}</button>
-                <br>
-               
-                </br>
-                <table style="text-align: right;" class="table-bordered table-striped table-condensed">
-                  <br>
-                  <thead>
-                       <tr>
-                          <th>#</th>
-                          <th style="text-align: left;">Item</th>
-                          <th>Quantidade</th>
-                          <th>Preço</th>
-                          <th>Total</th>
-                      </tr>
-                  </thead>
-                    <tbody>
-                        <tr ng-repeat="item in pedidos">
-                            <td> {{ $index +1 }} </td>
-                            <td> {{ menu[item.id].name }} </td>
-                            <td> {{ item.quantity }} </td>
-                            <td> {{ menu[item.id].price | currency}} </td>
-                            <td> {{ menu[item.id].price * item.quantity | currency}} </td>
-                        </tr>
-                    </tbody>
-                  </table>
-                    <br>
-                  <button type="button" class="btn btn-default form-control btn-lg" style="height:10%" ng-click="total(mesa)">
-                      <span class="glyphicon glyphicon-usd">&nbsp</span>Total
-                  </button>
-                  <button type="button" class="btn btn-danger form-control btn-lg" style="height:10%" ng-click="close(mesa)">
-                      <span class="glyphicon glyphicon-ok-sign">&nbsp</span>Close
-                  </button>
-
-                </div>  
-            </div>
-        </div>
-            
-        <div  class="panel panel-success" >
-            <div class="panel-heading">Orders</div>
-
-            <div class="panel-body">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="input-group">
-                      <input id="newTable" placeholder="#" type="text" class="form-control" ng-model="new">
-                      <span class="input-group-btn">
-                        <button class="btn btn-success btn" id="newTableBtn" type="button" ng-click="newTable(new)">Nova Mesa</button>
-                      </span>
-                    </div><!-- /input-group -->
-                  </div><!-- /.col-lg-6 -->
-                </div><!-- /.row -->
-                </br>
-                <select class="form-control" ng-model="mesa" ng-options="mesa for (mesa, pedidos) in orders">
-                    <option value="">Select table</option>
-                </select>
-                <select class="form-control" ng-model="item" ng-options="item.name for (id, item) in menu">
-                    <option value="">Select menu item</option>
-                </select>
-         
-            <br>
-            <button class="btn btn-lg btn-success form-control" style="height:10%" ng-click="order(mesa, item.id)">Fazer pedido!</button>
-      
-            </div>
+        <body style="margin:1%;">
+        <div ng-view>
         </div>
     </body>
 </html>
