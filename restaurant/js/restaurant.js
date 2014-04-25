@@ -1,10 +1,10 @@
 var app = angular.module("restaurant", ['ngRoute']);
 
 app.config(function($routeProvider) {
-    $routeProvider.when('/restaurant', {templateUrl:'restaurant.html', controller:'RestaurantController'});
-    $routeProvider.when('/menu', {templateUrl:'pedidos.html', controller:'RestaurantController'});
+    $routeProvider.when('/menu', {templateUrl:'menu.html', controller:'RestaurantController'});
+    $routeProvider.when('/pedidos', {templateUrl:'pedidos.html', controller:'RestaurantController'});
     $routeProvider.when('/mesas', {templateUrl:'mesas.html', controller:'RestaurantController'});
-    $routeProvider.otherwise({ redirectTo:'/restaurant'} );
+    $routeProvider.otherwise({ redirectTo:'/menu'} );
 });
     
 app.controller("RestaurantController", function ($scope, $http) {
