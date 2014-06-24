@@ -5,7 +5,7 @@ Exercises from Web Application Development using Javascript and AngularJS course
 
 # Contact List AngularJS Application
 A demonstration of the contact list application developed using AngularJS can be accessed using the link:  
-**Demo** - [http://pedrovitti.github.io/angularjs_course/](http://pedrovitti.github.io/angularjs_course/)
+**Phone List Demo** - [http://pedrovitti.github.io/angularjs_course/phoneList](http://pedrovitti.github.io/angularjs_course/phoneList)
 
 # Javascript Exercises
 In javascript-exercises folder has some javascript exercises (oh, really?) and a very simple restaurant ordering application using some javascript concepts like **object encapsulation**, **inheritance**, **immediately-invoked functions** and **error handling**, etc. applying developments patterns like **Revealing Module**, **Singleton**, etc. The application was tested using **karma** test-runner with **jasmine**.
